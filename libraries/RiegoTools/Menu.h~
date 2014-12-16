@@ -1,0 +1,73 @@
+#ifndef Adafruit_GFX_h
+#define Adafruit_GFX_h
+#endif
+#ifndef Adafruit_PCD8544_h
+#define Adafruit_PCD8544_h
+#endif
+#ifndef Menu_h
+#define Menu_h
+
+#include "Arduino.h"
+#include "../SPI/SPI.h"
+#include "../Adafruit-GFX/Adafruit_GFX.h"
+#include "../Adafruit-PCD8544/Adafruit_PCD8544.h"
+
+
+//SETUP MODES
+
+#define TIMEDATEEDIT 0
+#define TRIGGERSEDIT 1
+#define WAITING 2
+#define PAUSE 3
+#define WATERING 4
+
+//edition states
+#define SETSECONDS 5
+#define SETMINUTES 6
+#define SETHOURS 7
+#define SETDAYS 8
+#define SETMONTH 9
+#define SETYEAR 10
+#define SETTRIGGER1 11
+#define SETTRIGGER2 12
+#define SETTRIGGER3 13
+#define SETTRIGGER4 14
+
+
+class Menu {
+
+public:
+
+// Software SPI (slower updates, more flexible pin options):
+// pin 13 - Serial clock out (SCLK)
+// pin 11 - Serial data out (DIN)
+// pin 12 - Data/Command select (D/C)
+// no pin - LCD chip select (CS)
+// pin 10 - LCD reset (RST)
+static const int8_t NokiaSCLKpin = 13; // compatible with hardware ISP
+static const int8_t NokiaDNpin = 11; // compatible with hardware ISP
+static const int8_t NokiaDCpin = 12; 
+static const int8_t NokiaRESETpin = 10;
+static const int button1Pin = 2;  //MODE button ping
+static const int button2Pin = 3;  //SELECT button ping
+static const int button3Pin = 4;  //MOVE button ping
+int button1;
+int button2; 
+int button3; 
+int dtState;
+int menuState;
+
+
+Menu();
+
+void processKeys();
+ 
+void setMode(int state);
+
+void setEditionState(int state);
+
+void drawMenu();
+
+};
+
+#endif
